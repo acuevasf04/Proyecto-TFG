@@ -48,7 +48,7 @@ services:
       MYSQL_USER: usuario_web
       MYSQL_PASSWORD: password_seguro_123
     volumes:
-      - datos-mysql:/var/lib/mysql
+      - ./datos-mysql:/var/lib/mysql
     networks:
       - red-privada
 
