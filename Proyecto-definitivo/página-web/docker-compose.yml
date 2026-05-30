@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # 1. Balanceador de Carga
   nginx-balanceador:
     image: nginx:latest
     container_name: nginx-balanceador
@@ -10,69 +9,54 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./src:/var/www/html # Nginx necesita ver los archivos estáticos (CSS/JS)
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/www/certbot
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./src:/var/www/html
     depends_on:
       - backend1
       - backend2
     networks:
-      - red-web
-
-  # 2. Certbot para Let's Encrypt
-  certbot:
-    image: certbot/certbot
-    container_name: certbot-ssl
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done'"
-    networks:
-      - red-web
-
-  # 3. Servidor PHP Backend 1
+      - red-publica
   backend1:
     image: php:8.2-fpm-alpine
     container_name: app-php-1
     volumes:
-      - ./src:/var/www/html # Tu código fuente PHP
-    # Comando para instalar soporte de PostgreSQL al iniciar (cambiar si usas MySQL)
-    command: sh -c "docker-php-ext-install pdo pdo_pgsql && php-fpm"
+      - ./src:/var/www/html
+    command: sh -c "docker-php-ext-install pdo pdo_mysql && php-fpm"
     depends_on:
       - base-datos
     networks:
-      - red-web
-
-  # 4. Servidor PHP Backend 2
+      - red-publica
+      - red-privada
   backend2:
     image: php:8.2-fpm-alpine
     container_name: app-php-2
     volumes:
       - ./src:/var/www/html
-    command: sh -c "docker-php-ext-install pdo pdo_pgsql && php-fpm"
+    command: sh -c "docker-php-ext-install pdo pdo_mysql && php-fpm"
     depends_on:
       - base-datos
     networks:
-      - red-web
-
-  # 5. Base de Datos
+      - red-publica
+      - red-privada
   base-datos:
-    image: postgres:15-alpine
-    container_name: db-postgres
+    image: mysql:8.0
+    container_name: db-mysql
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      POSTGRES_USER: usuario_web
-      POSTGRES_PASSWORD: password_seguro_123
-      POSTGRES_DB: mi_app_db
+      MYSQL_ROOT_PASSWORD: root_password_super_seguro
+      MYSQL_DATABASE: mi_app_db
+      MYSQL_USER: usuario_web
+      MYSQL_PASSWORD: password_seguro_123
     volumes:
-      - datos-sql:/var/lib/postgresql/data
+      - datos-mysql:/var/lib/mysql
     networks:
-      - red-web
+      - red-privada
 
 volumes:
-  certbot-etc:
-  certbot-var:
-  datos-sql:
+  datos-mysql:
 
 networks:
-  red-web:
+  red-publica:
+    driver: bridge
+  red-privada:
     driver: bridge
