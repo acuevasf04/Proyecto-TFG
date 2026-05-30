@@ -1,0 +1,94 @@
+/* =========================================
+   AROMARIS – Estilos personalizados
+   ========================================= */
+
+:root {
+    --aromaris-green:       #4a7c59;
+    --aromaris-green-dark:  #2d4f38;
+    --aromaris-green-light: #e8f3ec;
+    --aromaris-accent:      #a8d5b5;
+    --aromaris-beige:       #f8f5f0;
+}
+
+/* Utilidades de color propias */
+.bg-aromaris         { background-color: var(--aromaris-green) !important; }
+.bg-aromaris-dark    { background-color: var(--aromaris-green-dark) !important; }
+.bg-aromaris-light   { background-color: var(--aromaris-green-light) !important; }
+.text-aromaris       { color: var(--aromaris-green) !important; }
+.text-aromaris-accent{ color: var(--aromaris-accent) !important; }
+.btn-aromaris {
+    background-color: var(--aromaris-green);
+    color: #fff;
+    border: none;
+}
+.btn-aromaris:hover {
+    background-color: var(--aromaris-green-dark);
+    color: #fff;
+}
+
+/* Padding de sección */
+.py-6 { padding-top: 5rem; padding-bottom: 5rem; }
+
+/* Letra espaciada */
+.letter-spacing { letter-spacing: .15em; font-size: .85rem; }
+
+/* ---- NAVBAR ---- */
+.navbar-brand { letter-spacing: .03em; }
+
+/* ---- HERO ---- */
+.hero-section {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--aromaris-green-dark) 0%, var(--aromaris-green) 60%, #6aab7e 100%);
+    padding-top: 80px; /* compensa navbar fixed */
+}
+
+/* ---- ABOUT image placeholder ---- */
+.about-img-wrapper { height: 380px; }
+.about-placeholder {
+    height: 100%;
+    background: linear-gradient(135deg, var(--aromaris-green) 0%, var(--aromaris-green-dark) 100%);
+}
+
+/* ---- PRODUCT CARDS ---- */
+.product-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+    background-color: #fff;
+}
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,.1) !important;
+}
+.product-icon { height: 72px; display: flex; align-items: center; justify-content: center; }
+
+/* ---- CONTACT ICONS ---- */
+.contact-icon-wrap {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    background-color: var(--aromaris-green-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---- LOGIN CARD ---- */
+.login-avatar { width: fit-content; }
+
+/* Eliminar el borde doble en input-group cuando hay error */
+.input-group .form-control.is-invalid {
+    border-color: #dc3545;
+    z-index: 1;
+}
+
+/* ---- FOOTER ---- */
+footer { border-top: 1px solid rgba(255,255,255,.1); }
+
+/* ---- Scrollbar suave ---- */
+html { scroll-behavior: smooth; }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .hero-section h1 { font-size: 2.5rem; }
+    .py-6 { padding-top: 3rem; padding-bottom: 3rem; }
+}
