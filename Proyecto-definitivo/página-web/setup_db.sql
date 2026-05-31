@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS Detalles_Pedidos (
 -- Usuario admin (password: aromaris2024)
 -- Hash generado con password_hash('aromaris2024', PASSWORD_DEFAULT)
 INSERT IGNORE INTO Usuarios (nombre, email, password_hash) VALUES
-('Administrador', 'admin@aromaris.es',
+('Administrador', 'admin@aromaris.org',
  '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 -- NOTA: El hash de arriba es para el password 'password' (de Laravel).
 -- Para generar el tuyo, ejecuta este PHP: echo password_hash('aromaris2024', PASSWORD_DEFAULT);
