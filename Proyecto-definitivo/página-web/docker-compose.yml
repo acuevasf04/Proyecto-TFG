@@ -23,11 +23,11 @@ services:
     restart: always
     volumes:
       - ./src:/var/www/html
+      - ./php/docker.conf:/usr/local/etc/php-fpm.d/docker.conf
     command: sh -c "docker-php-ext-install pdo pdo_mysql && php-fpm"
     depends_on:
       - base-datos
     networks:
-      - red-publica
       - red-privada
   backend2:
     image: php:8.2-fpm-alpine
@@ -35,11 +35,11 @@ services:
     restart: always
     volumes:
       - ./src:/var/www/html
+      - ./php/docker.conf:/usr/local/etc/php-fpm.d/docker.conf
     command: sh -c "docker-php-ext-install pdo pdo_mysql && php-fpm"
     depends_on:
       - base-datos
     networks:
-      - red-publica
       - red-privada
   base-datos:
     image: mysql:8.0
