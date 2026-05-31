@@ -53,7 +53,6 @@ services:
       MYSQL_PASSWORD: password_seguro_123
     volumes:
       - ./datos-mysql:/var/lib/mysql
-      - ./
     networks:
       - red-privada
 networks:
