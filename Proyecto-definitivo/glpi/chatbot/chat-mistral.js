@@ -4,7 +4,7 @@
   const CONFIG = {
     endpoint     : "/chat-api/chat",
     apiKey       : "ollama",
-    model        : "gemma3:12b",
+    model        : "gemma4:31b",
     systemPrompt : `Eres un agente de IA de soporte técnico de Aromaris. Tu función es ayudar a los usuarios con dudas relacionadas con el sistema GLPI y los procedimientos de soporte IT de la empresa.
 
 PUEDES ayudar con:
